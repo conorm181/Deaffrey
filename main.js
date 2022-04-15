@@ -6,6 +6,8 @@ const { Client, Intents } = require('discord.js');
 const client = new Client(
     { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }
 );
+//Accessing the message library
+var clientMessage = require('./message.js');
 // Notify progress
 client.on('ready', function(e){
     console.log(`Logged in as ${client.user.tag}!`)
@@ -13,10 +15,6 @@ client.on('ready', function(e){
 // Authenticate
 client.login(process.env.DISCORD_TOKEN)
 
+
 //Example Functionality
-client.on('messageCreate',
-    function(msg){
-        if(msg.content === "Dicklips"){
-            msg.reply("Alright spoob")
-        }
-    })
+client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
