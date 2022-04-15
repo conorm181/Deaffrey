@@ -7,7 +7,7 @@ const client = new Client(
     { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }
 );
 //Accessing the message library
-var tools = require('./message.js');
+var clientMessage = require('./message.js');
 // Notify progress
 client.on('ready', function(e){
     console.log(`Logged in as ${client.user.tag}!`)
@@ -17,4 +17,4 @@ client.login(process.env.DISCORD_TOKEN)
 
 
 //Example Functionality
-client.on('messageCreate', function(msg){tools.sendResponse(msg)})
+client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
