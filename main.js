@@ -8,13 +8,13 @@ const client = new Client(
 );
 //Accessing the message library
 var clientMessage = require('./message.js');
+
 // Notify progress
 client.on('ready', function(e){
-    console.log(`Logged in as ${client.user.tag}!`)
+    console.log(`Logged in as ${client.user.tag}!`)    
 })
 // Authenticate
 client.login(process.env.DISCORD_TOKEN)
-
 
 //Example Functionality
 client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
