@@ -39,11 +39,6 @@ if(msg.content === "gc"){
             }
         )
         .catch(console.error);
-        console.log(x.length);
-        /*for (let a of x.list()) {
-            console.log(x[a]);
-            
-        }*/
         
 }
 }
