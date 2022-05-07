@@ -8,5 +8,11 @@ module.exports = {
         {
             msg.reply("Lad");
         }
+        else if(msg.content === "file contents")
+        {
+            //Accessing the file library
+            var file = require('./file.js');
+            msg.reply(file.readFile());
+        }
     }
 };
