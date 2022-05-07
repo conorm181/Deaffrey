@@ -19,6 +19,7 @@
   "homepage": "https://github.com/conorm181/Deaffrey#readme",
   "dependencies": {
     "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.0.0",
+    "replace-in-file": "^6.3.2"
   }
 }

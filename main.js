@@ -8,9 +8,12 @@ const client = new Client({
         
     }
 );
+
 //Accessing the libraries
 var clientMessage = require('./message.js');
 var vs = require('./voicestates.js');
+var file = require('./file.js');
+
 // Notify progress
 client.on('ready', function(e){
   console.log(`Logged in as ${client.user.tag}!`);
