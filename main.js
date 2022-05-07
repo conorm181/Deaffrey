@@ -8,8 +8,10 @@ const client = new Client({
         
     }
 );
+var file = require('./file.js');
 //Accessing the message library
 var clientMessage = require('./message.js');
+
 
 // Notify progress
 client.on('ready', function(e){
