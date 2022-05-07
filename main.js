@@ -8,10 +8,11 @@ const client = new Client({
         
     }
 );
-var file = require('./file.js');
-//Accessing the message library
-var clientMessage = require('./message.js');
 
+//Accessing the libraries
+var clientMessage = require('./message.js');
+var vs = require('./voicestates.js');
+var file = require('./file.js');
 
 // Notify progress
 client.on('ready', function(e){
@@ -24,41 +25,4 @@ client.login(process.env.DISCORD_TOKEN)
 client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
 
 //Voicstate Listener
-client.on("voiceStateUpdate", function(oldState, newState){
-    /*
-    Debug Block
-    console.log('-----------------------------------OldState----------------------------------------');
-    console.log(oldState.id+' - '+oldState.selfDeaf);
-    console.log('-----------------------------------NewState----------------------------------------');
-    console.log(newState.id+' - '+newState.selfDeaf+'\n\n\n\n');
-    */
-    if(!oldState.selfDeaf && newState.selfDeaf)
-        console.log(oldState.member.user.username + " has deafened!\n\n\n");
-    else if(oldState.selfDeaf && !newState.selfDeaf)
-        console.log(oldState.member.user.username + " has undeafened!\n\n\n")
-    
-});
-
-client.on('messageCreate', function(msg){
-if(msg.content === "gc"){
-    //const curGuild = JSON.stringify(Guild.fetch(msg.guild.id));
-    const Guilds = client.guilds.cache.map(guild => guild.id);
-    console.log(Guilds);
-    
-    let fuck ="";
-    const guild = client.guilds.resolve(Guilds[0]);
-    // Fetch the members of the guild and log them
-    const x = guild.members.fetch()
-        .then(
-            members => {
-                members.forEach(member => {
-                    fuck+=member.toString();
-                    console.log(member.user.username);
-                });
-            }
-        )
-        .catch(console.error);
-        
-}
-}
-)
+client.on("voiceStateUpdate", function(oldState, newState){vs.detectDeafen(oldState, newState)});
