@@ -12,6 +12,8 @@ module.exports = {
             console.log(oldState.member.user.username + " has deafened!\n\n\n");
         else if(oldState.selfDeaf && !newState.selfDeaf)
             console.log(oldState.member.user.username + " has undeafened!\n\n\n");
+            //TODO check for new leader
+            //TODO timespan diff for logging
         }
    
 };

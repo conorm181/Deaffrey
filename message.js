@@ -1,14 +1,8 @@
+const Discord = require("discord.js");
 module.exports = {
 
     sendResponse: function (msg) {
-        if(msg.content === "Dicklips"){
-            msg.reply("Yep");
-        }
-        else if(msg.content === "Schan")
-        {
-            msg.reply("Lad");
-        }
-        else if(msg.content === "file contents")
+        if(msg.content === "leaderboard")
         {
             //Accessing the file library
             var file = require('./file.js');
@@ -34,5 +28,20 @@ module.exports = {
                 .catch(console.error);
                 
         }
+      /*  else if (msg.content === "g")
+        {
+            const embed = new Discord.RichEmbed() //Ver 11.5.1 of Discord.js
+.setTitle("This is a title")
+.setTitle("http://tryitands.ee")
+.setDescription("This is a description")
+.setTimestamp()
+.setFooter("This is a footer")
+.setAuthor("This is the author's name") //and this its profile pic)
+.addField("This is a field", "this is its description")
+.setImage("https://cdn.discordapp.com/avatars/449250687868469258/1709ab4f567c56eaa731518ff621747c.png?size=2048")
+.setThumbnail("https://cdn.discordapp.com/avatars/449250687868469258/1709ab4f567c56eaa731518ff621747c.png?size=2048")
+
+            msg.reply(embed);
+        }*/
     }
 };

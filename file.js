@@ -3,11 +3,11 @@ const replace = require('replace-in-file');
 module.exports = {
 
     readFile: function () {
-        var data = "";
+        var data = "Username : Time Spent Deafened\n";
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
             info = line.split(',');
-            data += info[0] + " has a grand total of " + info[1] + " time deafened\n";
+            data += info[0] + " : " + info[1] + "\n";
             });
         console.log(data);
         return data;
