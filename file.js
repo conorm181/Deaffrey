@@ -3,7 +3,7 @@ const replace = require('replace-in-file');
 module.exports = {
 
     readFile: function () {
-        var data = "Username : Time Spent Deafened\n";
+        let data = "Username : Time Spent Deafened\n";
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
             info = line.split(',');
@@ -15,11 +15,11 @@ module.exports = {
 
     //username : string, timeSpentDeafened : TimeSpan (HH:MM:SS)
     writeToFile: function (username, timeSpentDeafened){
-        var curFile = this.readFileIntoArray();
-        var lineToReplace = "";
+        let curFile = this.readFileIntoArray();
+        let lineToReplace = "";
         console.log(typeof curFile);
         curFile.forEach(line => {if(line.includes(username)) lineToReplace = line;});
-        var newLine = username + "," + timeSpentDeafened;
+        let newLine = username + "," + timeSpentDeafened;
 
         const options = {
             files: 'data.txt',
@@ -37,11 +37,27 @@ module.exports = {
     },
 
     readFileIntoArray: function(){
-        var data = [];
+        let data = [];
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
                 data.push(line);
             });
         return data;
+        },
+
+    checkLeaderStatus: function(){
+        let unsortedLeaderboard = this.readFileIntoArray();
+        let leaderboardHashmap = new Map();
+        unsortedLeaderboard.forEach(line => {
+            let pair = line.split(',');
+            leaderboardHashmap.set(pair[0],pair[1].replace(/:/g,''));
+        });
+        let largest = 0
+        for(let i = 0; i < leaderboardHashmap.size; i++)
+        {
+            if(leaderboardHashmap[i].value > largest)
+                largest = leaderboardHashmap[i];
+        }
+        console.log(largest);
     }
 };

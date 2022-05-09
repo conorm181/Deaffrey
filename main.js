@@ -8,12 +8,29 @@ const client = new Client({
         
     }
 );
-
+/*import fetch from 'node-fetch';
+fetch("https://w2g.tv/rooms/create.json", {
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        "w2g_api_key": process.env.W2G_TOKEN,
+        "share": "https://www.youtube.com/watch?v=8Wdp35Z-fRs",
+        "bg_color": "#00ff00",
+        "bg_opacity": "50"
+    })
+})
+.then(response => response.json())
+.then(function (data) {
+    console.log("W2G: Here is your room! \n https://w2g.tv/rooms/" + data.streamkey);
+});*/
 //Accessing the libraries
 var clientMessage = require('./message.js');
 var vs = require('./voicestates.js');
 var file = require('./file.js');
-
+file.checkLeaderStatus();
 // Notify progress
 client.on('ready', function(e){
   console.log(`Logged in as ${client.user.tag}!`);
