@@ -1,19 +1,19 @@
 var fs = require("fs");
+var moment = require('moment');
 const replace = require('replace-in-file');
+var list = new Map();
 module.exports = {
 
     readFile: function () {
-        let data = "Username : Time Spent Deafened\n";
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
-            info = line.split(',');
-            data += info[0] + " : " + info[1] + "\n";
+                let kvp = line.split(',');
+                list.set(kvp[0],moment.duration(kvp[1], 'seconds'));
             });
-        console.log(data);
-        return data;
+        return list;
     },
 
-    //username : string, timeSpentDeafened : TimeSpan (HH:MM:SS)
+    //username : string, timeSpentDeafened : TimeSpan ('seconds')
     writeToFile: function (username, timeSpentDeafened){
         let curFile = this.readFileIntoArray();
         let lineToReplace = "";
@@ -43,21 +43,36 @@ module.exports = {
                 data.push(line);
             });
         return data;
-        },
+    },
 
-    checkLeaderStatus: function(){
-        let unsortedLeaderboard = this.readFileIntoArray();
-        let leaderboardHashmap = new Map();
-        unsortedLeaderboard.forEach(line => {
-            let pair = line.split(',');
-            leaderboardHashmap.set(pair[0],pair[1].replace(/:/g,''));
-        });
-        let largest = 0
-        for(let i = 0; i < leaderboardHashmap.size; i++)
-        {
-            if(leaderboardHashmap[i].value > largest)
-                largest = leaderboardHashmap[i];
+    readFileIntoHashMap: function(){
+        let data = new Map();
+        const allFileContents = fs.readFileSync('data.txt', 'utf-8');
+            allFileContents.split(/\r?\n/).forEach(line =>  {
+                let kvp = line.split(',');
+                //console.log(kvp);
+                data.set(kvp[0],moment.duration(kvp[1], 'seconds'));
+            });
+        return data;
+    },
+
+    getLeaderboard: function(){
+        let arrayOfValues = [];
+        let sortedList = [];
+        for (const [key, value] of list) {
+            arrayOfValues.push(value.as('seconds'));
+          }
+        arrayOfValues.sort(function(a, b){return b-a});
+          console.log(arrayOfValues);
+        for(const x of arrayOfValues){
+            for (const [key, value] of list) {
+                if(x === value.as('seconds'))
+                {
+                    console.log(key,value.as('seconds'));
+                    sortedList.push("\n"+key+" : "+(value.as('minutes')).toFixed(2)+" minutes");
+                }
+              }
         }
-        console.log(largest);
+        return sortedList;
     }
 };

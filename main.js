@@ -30,7 +30,12 @@ fetch("https://w2g.tv/rooms/create.json", {
 var clientMessage = require('./message.js');
 var vs = require('./voicestates.js');
 var file = require('./file.js');
-file.checkLeaderStatus();
+var map = file.readFileIntoHashMap();
+for (const [key, value] of map) {
+    console.log(key, value.as('seconds'));
+  }
+file.readFile();
+file.getLeaderboard();
 // Notify progress
 client.on('ready', function(e){
   console.log(`Logged in as ${client.user.tag}!`);
