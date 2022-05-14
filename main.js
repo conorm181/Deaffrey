@@ -31,6 +31,7 @@ var clientMessage = require('./message.js');
 var vs = require('./voicestates.js');
 var file = require('./file.js');
 var map = file.readFileIntoHashMap();
+
 for (const [key, value] of map) {
     console.log(key, value.as('seconds'));
   }
@@ -43,21 +44,19 @@ client.on('ready', function(e){
   let voiceLogs = {};
 const Guilds = client.guilds.cache.map(guild => guild.id);
             console.log(Guilds);
-            /*
+            
             let fuck ="";
             const guild = client.guilds.resolve(Guilds[0]);
-            console.log(guild);
             // Fetch the members of the guild and log them
             const x = guild.members.fetch()
                 .then(
                     members => {
                         members.forEach(member => {
-                            fuck+=member.toString();
-                            console.log(member.user.username);
+                            console.log(member.user.username.toString() + "-" +member.user.id.toString());
                         });
                     }
                 )
-                .catch(console.error);*/
+                .catch(console.error);
 })
 // Authenticate
 client.login(process.env.DISCORD_TOKEN)
