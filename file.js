@@ -1,25 +1,33 @@
 var fs = require("fs");
 var moment = require('moment');
 const replace = require('replace-in-file');
+const user = require('./User.js');
 var list = new Map();
+var listOfUsers = [];
 module.exports = {
 
     readFile: function () {
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
-                let kvp = line.split(',');
-                list.set(kvp[0],moment.duration(kvp[1], 'seconds'));
+                let data = line.split(',');
+                list.set(data[1],data   [2]);
+                let tempUser = new user(data[0],data[1],data[2]);
+                listOfUsers.push(tempUser);
             });
-        return list;
+            listOfUsers.forEach(function (user){console.log(user)});
+        return listOfUsers;
     },
 
     //username : string, timeSpentDeafened : TimeSpan ('seconds')
-    writeToFile: function (username, timeSpentDeafened){
+    writeToFile: function (id, timeSpentDeafened){
         let curFile = this.readFileIntoArray();
         let lineToReplace = "";
         console.log(typeof curFile);
-        curFile.forEach(line => {if(line.includes(username)) lineToReplace = line;});
-        let newLine = username + "," + timeSpentDeafened;
+        curFile.forEach(line => {if(line.includes(id)) lineToReplace = line;});
+        let userToUpdate = listOfUsers.find(user => user.ID === id);
+        console.log(userToUpdate.TimeSpentDeafened + "," + timeSpentDeafened);
+        let sum = (+userToUpdate.TimeSpentDeafened) + (+timeSpentDeafened);
+        let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + sum;
 
         const options = {
             files: 'data.txt',
@@ -68,7 +76,6 @@ module.exports = {
             for (const [key, value] of list) {
                 if(x === value.as('seconds'))
                 {
-                    console.log(key,value.as('seconds'));
                     sortedList.push("\n"+key+" : "+(value.as('minutes')).toFixed(2)+" minutes");
                 }
               }
