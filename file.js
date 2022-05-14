@@ -1,25 +1,25 @@
 var fs = require("fs");
+var moment = require('moment');
 const replace = require('replace-in-file');
+var list = new Map();
 module.exports = {
 
     readFile: function () {
-        var data = "Username : Time Spent Deafened\n";
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
-            info = line.split(',');
-            data += info[0] + " : " + info[1] + "\n";
+                let kvp = line.split(',');
+                list.set(kvp[0],moment.duration(kvp[1], 'seconds'));
             });
-        console.log(data);
-        return data;
+        return list;
     },
 
-    //username : string, timeSpentDeafened : TimeSpan (HH:MM:SS)
+    //username : string, timeSpentDeafened : TimeSpan ('seconds')
     writeToFile: function (username, timeSpentDeafened){
-        var curFile = this.readFileIntoArray();
-        var lineToReplace = "";
+        let curFile = this.readFileIntoArray();
+        let lineToReplace = "";
         console.log(typeof curFile);
         curFile.forEach(line => {if(line.includes(username)) lineToReplace = line;});
-        var newLine = username + "," + timeSpentDeafened;
+        let newLine = username + "," + timeSpentDeafened;
 
         const options = {
             files: 'data.txt',
@@ -37,11 +37,42 @@ module.exports = {
     },
 
     readFileIntoArray: function(){
-        var data = [];
+        let data = [];
         const allFileContents = fs.readFileSync('data.txt', 'utf-8');
             allFileContents.split(/\r?\n/).forEach(line =>  {
                 data.push(line);
             });
         return data;
+    },
+
+    readFileIntoHashMap: function(){
+        let data = new Map();
+        const allFileContents = fs.readFileSync('data.txt', 'utf-8');
+            allFileContents.split(/\r?\n/).forEach(line =>  {
+                let kvp = line.split(',');
+                //console.log(kvp);
+                data.set(kvp[0],moment.duration(kvp[1], 'seconds'));
+            });
+        return data;
+    },
+
+    getLeaderboard: function(){
+        let arrayOfValues = [];
+        let sortedList = [];
+        for (const [key, value] of list) {
+            arrayOfValues.push(value.as('seconds'));
+          }
+        arrayOfValues.sort(function(a, b){return b-a});
+          console.log(arrayOfValues);
+        for(const x of arrayOfValues){
+            for (const [key, value] of list) {
+                if(x === value.as('seconds'))
+                {
+                    console.log(key,value.as('seconds'));
+                    sortedList.push("\n"+key+" : "+(value.as('minutes')).toFixed(2)+" minutes");
+                }
+              }
+        }
+        return sortedList;
     }
 };
