@@ -30,13 +30,10 @@ fetch("https://w2g.tv/rooms/create.json", {
 var clientMessage = require('./message.js');
 var vs = require('./voicestates.js');
 var file = require('./file.js');
-var map = file.readFileIntoHashMap();
 
-for (const [key, value] of map) {
-    console.log(key, value.as('seconds'));
-  }
 file.readFile();
-file.getLeaderboard();
+file.writeToFile('689217913005277282',1);
+//file.getLeaderboard();
 // Notify progress
 client.on('ready', function(e){
   console.log(`Logged in as ${client.user.tag}!`);
@@ -44,19 +41,21 @@ client.on('ready', function(e){
   let voiceLogs = {};
 const Guilds = client.guilds.cache.map(guild => guild.id);
             console.log(Guilds);
-            
+            /*
             let fuck ="";
             const guild = client.guilds.resolve(Guilds[0]);
+            console.log(guild);
             // Fetch the members of the guild and log them
             const x = guild.members.fetch()
                 .then(
                     members => {
                         members.forEach(member => {
-                            console.log(member.user.username.toString() + "-" +member.user.id.toString());
+                            fuck+=member.toString();
+                            console.log(member.user.username);
                         });
                     }
                 )
-                .catch(console.error);
+                .catch(console.error);*/
 })
 // Authenticate
 client.login(process.env.DISCORD_TOKEN)
