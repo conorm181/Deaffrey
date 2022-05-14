@@ -39,6 +39,25 @@ file.getLeaderboard();
 // Notify progress
 client.on('ready', function(e){
   console.log(`Logged in as ${client.user.tag}!`);
+
+  let voiceLogs = {};
+const Guilds = client.guilds.cache.map(guild => guild.id);
+            console.log(Guilds);
+            /*
+            let fuck ="";
+            const guild = client.guilds.resolve(Guilds[0]);
+            console.log(guild);
+            // Fetch the members of the guild and log them
+            const x = guild.members.fetch()
+                .then(
+                    members => {
+                        members.forEach(member => {
+                            fuck+=member.toString();
+                            console.log(member.user.username);
+                        });
+                    }
+                )
+                .catch(console.error);*/
 })
 // Authenticate
 client.login(process.env.DISCORD_TOKEN)
@@ -48,3 +67,5 @@ client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
 
 //Voicstate Listener
 client.on("voiceStateUpdate", function(oldState, newState){vs.detectDeafen(oldState, newState)});
+
+//Volitile Dictionary - Doesnt Work Sadge
