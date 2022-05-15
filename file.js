@@ -15,6 +15,7 @@ module.exports = {
                 listOfUsers.push(tempUser);
             });
             listOfUsers.forEach(function (user){console.log(user)});
+            this.orderUserList(listOfUsers);
         return listOfUsers;
     },
 
@@ -65,21 +66,15 @@ module.exports = {
     },
 
     getLeaderboard: function(){
-        let arrayOfValues = [];
-        let sortedList = [];
-        for (const [key, value] of list) {
-            arrayOfValues.push(value.as('seconds'));
-          }
-        arrayOfValues.sort(function(a, b){return b-a});
-          console.log(arrayOfValues);
-        for(const x of arrayOfValues){
-            for (const [key, value] of list) {
-                if(x === value.as('seconds'))
-                {
-                    sortedList.push("\n"+key+" : "+(value.as('minutes')).toFixed(2)+" minutes");
-                }
-              }
-        }
-        return sortedList;
+        console.log(typeof listOfUsers);
+        return listOfUsers;
+    },
+
+    getTopUser: function(){
+        return this.listOfUsers[0];
+    },
+
+    orderUserList: function(userList){
+        userList.sort((a,b) => (a.TimeSpentDeafened < b.TimeSpentDeafened) ? 1 : ((b.TimeSpentDeafened < a.TimeSpentDeafened) ? -1 : 0));
     }
 };

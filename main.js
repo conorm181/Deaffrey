@@ -32,7 +32,6 @@ var vs = require('./voicestates.js');
 var file = require('./file.js');
 
 file.readFile();
-file.writeToFile('689217913005277282',1);
 //file.getLeaderboard();
 // Notify progress
 client.on('ready', function(e){
