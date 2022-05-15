@@ -18,11 +18,27 @@ module.exports = {
             let userList = [];
             userList = file.getLeaderboard();
             console.log(typeof userList);
-            userList.forEach(user => {exampleEmbed.addFields(
+            /*
+            exampleEmbed.addFields(
+                { name: 'Name', value: `\u200B`, inline: true },
+                { name: 'Time Spend Deafened', value: `\u200B`, inline: true },
+                { name: '\u200B', value: '\u200B', inline: true },
+                );*/
+            userList.forEach(user => {
+                if(user===userList[0]){
+                exampleEmbed.addFields(
                 { name: 'Name', value: `${user.Name}`, inline: true },
                 { name: 'Time Spend Deafened', value: `${user.TimeSpentDeafened} seconds`, inline: true },
                 { name: '\u200B', value: '\u200B', inline: true },
-            )});
+                )}else
+                { 
+                exampleEmbed.addFields(
+                    { name: '\u200B', value: `${user.Name}`, inline: true },
+                    { name: '\u200B', value: `${user.TimeSpentDeafened} seconds`, inline: true },
+                    { name: '\u200B', value: '\u200B', inline: true },
+                )
+                }
+        });
             exampleEmbed.setTimestamp()
             msg.reply({ embeds: [exampleEmbed] });
         }
