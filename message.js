@@ -14,12 +14,16 @@ module.exports = {
             //Message Embed
             const exampleEmbed = new MessageEmbed()
             .setColor('#0099ff')
-            .setAuthor({ name: 'Deafen Leaderboard' })
-            .addFields(
-                { name: 'Inline field title', value: 'Some value here', inline: true },
-                { name: 'Inline field title', value: 'Some value here', inline: true },
-            )
-            .setTimestamp()
+            .setAuthor({ name: 'Deafen Leaderboard' });
+            let userList = [];
+            userList = file.getLeaderboard();
+            console.log(typeof userList);
+            userList.forEach(user => {exampleEmbed.addFields(
+                { name: 'Name', value: `${user.Name}`, inline: true },
+                { name: 'Time Spend Deafened', value: `${user.TimeSpentDeafened} seconds`, inline: true },
+                { name: '\u200B', value: '\u200B', inline: true },
+            )});
+            exampleEmbed.setTimestamp()
             msg.reply({ embeds: [exampleEmbed] });
         }
         else if(msg.content === "gc"){
