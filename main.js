@@ -65,4 +65,3 @@ client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
 //Voicstate Listener
 client.on("voiceStateUpdate", function(oldState, newState){vs.detectDeafen(oldState, newState)});
 
-//Volitile Dictionary - Doesnt Work Sadge
