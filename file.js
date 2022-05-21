@@ -22,6 +22,14 @@ module.exports = {
     //username : string, timeSpentDeafened : TimeSpan ('seconds')
     writeToFile: function (id, timeSpentDeafened){
         let curFile = this.readFileIntoArray();
+        for(let i = 0; i < listOfUsers.length; i++)
+        {
+            if(listOfUsers[i].ID === id)
+            {
+                let sum = (+listOfUsers[i].TimeSpentDeafened) + (+timeSpentDeafened);
+                listOfUsers[i].TimeSpentDeafened = sum;
+            }
+        }
         let lineToReplace = "";
         console.log(typeof curFile);
         curFile.forEach(line => {if(line.includes(id)) lineToReplace = line;});
