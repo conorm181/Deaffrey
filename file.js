@@ -22,13 +22,18 @@ module.exports = {
     //username : string, timeSpentDeafened : TimeSpan ('seconds')
     writeToFile: function (id, timeSpentDeafened){
         let curFile = this.readFileIntoArray();
+        for(let i = 0; i < listOfUsers.length; i++)
+        {
+            if(listOfUsers[i].ID === id)
+            {
+                let sum = (+listOfUsers[i].TimeSpentDeafened) + (+timeSpentDeafened);
+                listOfUsers[i].TimeSpentDeafened = sum;
+            }
+        }
         let lineToReplace = "";
-        console.log(typeof curFile);
         curFile.forEach(line => {if(line.includes(id)) lineToReplace = line;});
         let userToUpdate = listOfUsers.find(user => user.ID === id);
-        console.log(userToUpdate.TimeSpentDeafened + "," + timeSpentDeafened);
-        let sum = (+userToUpdate.TimeSpentDeafened) + (+timeSpentDeafened);
-        let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + sum;
+        let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + userToUpdate.TimeSpentDeafened;
 
         const options = {
             files: 'data.txt',
@@ -66,7 +71,6 @@ module.exports = {
     },
 
     getLeaderboard: function(){
-        console.log(typeof listOfUsers);
         return listOfUsers;
     },
 
