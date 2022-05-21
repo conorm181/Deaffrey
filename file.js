@@ -31,12 +31,9 @@ module.exports = {
             }
         }
         let lineToReplace = "";
-        console.log(typeof curFile);
         curFile.forEach(line => {if(line.includes(id)) lineToReplace = line;});
         let userToUpdate = listOfUsers.find(user => user.ID === id);
-        console.log(userToUpdate.TimeSpentDeafened + "," + timeSpentDeafened);
-        let sum = (+userToUpdate.TimeSpentDeafened) + (+timeSpentDeafened);
-        let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + sum;
+        let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + userToUpdate.TimeSpentDeafened;
 
         const options = {
             files: 'data.txt',
@@ -74,7 +71,6 @@ module.exports = {
     },
 
     getLeaderboard: function(){
-        console.log(typeof listOfUsers);
         return listOfUsers;
     },
 
