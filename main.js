@@ -39,7 +39,7 @@ client.on('ready', function(e){
 
   let voiceLogs = {};
 const Guilds = client.guilds.cache.map(guild => guild.id);
-            console.log(Guilds);
+            //console.log(Guilds);
             /*
             let fuck ="";
             const guild = client.guilds.resolve(Guilds[0]);
