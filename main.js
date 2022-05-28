@@ -30,7 +30,7 @@ fetch("https://w2g.tv/rooms/create.json", {
 var clientMessage = require('./message.js');
 var vs = require('./voicestates.js');
 var file = require('./file.js');
-
+var output = "";
 file.readFile();
 //file.getLeaderboard();
 // Notify progress
@@ -38,9 +38,10 @@ client.on('ready', function(e){
   console.log(`Logged in as ${client.user.tag}!`);
 
   let voiceLogs = {};
+
 const Guilds = client.guilds.cache.map(guild => guild.id);
             //console.log(Guilds);
-            /*
+            
             let fuck ="";
             const guild = client.guilds.resolve(Guilds[0]);
             console.log(guild);
@@ -49,19 +50,23 @@ const Guilds = client.guilds.cache.map(guild => guild.id);
                 .then(
                     members => {
                         members.forEach(member => {
-                            fuck+=member.toString();
-                            console.log(member.user.username);
+                            output+=member.user.id + "," + member.user.username + "\n";
+                            //console.log(member.user.username);
                         });
                     }
                 )
-                .catch(console.error);*/
+                .catch(console.error);
 })
 // Authenticate
 client.login(process.env.DISCORD_TOKEN)
 
 //Example Functionality
-client.on('messageCreate', function(msg){clientMessage.sendResponse(msg)})
+client.on('messageCreate', function(msg){
+    if(msg.content === "setup")
+        msg.reply(output);
+    else
+        clientMessage.sendResponse(msg);
+})
 
 //Voicstate Listener
 client.on("voiceStateUpdate", function(oldState, newState){vs.detectDeafen(oldState, newState)});
-
