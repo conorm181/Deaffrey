@@ -19,34 +19,44 @@ module.exports = {
     },
 
     //username : string, timeSpentDeafened : TimeSpan ('seconds')
-    writeToFile: function (id, timeSpentDeafened){
+    writeToFile: function (id, timeSpentDeafened, name){
         let curFile = this.readFileIntoArray();
+        var userExists = false;
         for(let i = 0; i < listOfUsers.length; i++)
         {
             if(listOfUsers[i].ID === id)
             {
                 let sum = (+listOfUsers[i].TimeSpentDeafened) + (+timeSpentDeafened);
                 listOfUsers[i].TimeSpentDeafened = sum;
+                userExists = true;
+                break;
             }
         }
-        let lineToReplace = "";
-        curFile.forEach(line => {if(line.includes(id)) lineToReplace = line;});
-        let userToUpdate = listOfUsers.find(user => user.ID === id);
-        let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + userToUpdate.TimeSpentDeafened;
-
-        const options = {
-            files: 'data.txt',
-            from: lineToReplace,
-            to: newLine,
-          };
-
-        try {
-        const results = replace.sync(options);
-            console.log('Replacement results:', results);
+        if(userExists){
+            let lineToReplace = "";
+            curFile.forEach(line => {if(line.includes(id)) lineToReplace = line;});
+            let userToUpdate = listOfUsers.find(user => user.ID === id);
+            let newLine = userToUpdate.ID + "," + userToUpdate.Name + "," + userToUpdate.TimeSpentDeafened;
+            const options = {
+                files: 'data.txt',
+                from: lineToReplace,
+                to: newLine,
+              };
+            
+              try {
+                const results = replace.sync(options);
+                    console.log('Replacement results:', results);
+                }
+                catch (error) {
+                    console.error('Error occurred:', error);
+                }
         }
-        catch (error) {
-            console.error('Error occurred:', error);
+        else{
+            var newUser = "\r\n" + id + "," + name + "," + timeSpentDeafened;
+            fs.appendFileSync('data.txt', newUser);
         }
+        listOfUsers.length = 0;
+        this.readFile();
     },
 
     readFileIntoArray: function(){

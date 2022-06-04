@@ -9,7 +9,7 @@ module.exports = {
             var file = require('./file.js');
             let output = "Username : Time Spend Deafened\n";
             //output += file.getLeaderboard().toString();
-
+            // 144562710363897856,Ethan,1
 
             //Message Embed
             const exampleEmbed = new MessageEmbed()
