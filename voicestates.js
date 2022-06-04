@@ -20,7 +20,7 @@ module.exports = {
                 console.log("User left the channel while deaf");
                 let temp = new moment().diff(vol[oldState.member.user.id].time, 'seconds');
                 console.log(oldState.member.user.username + " has undeafened! after "+ temp +"\n\n\n");
-                file.writeToFile(oldState.member.user.id,temp);
+                file.writeToFile(oldState.member.user.id,temp, oldState.member.user.username);
                 vol[newState.member.user.id] = null;
                 
             }
@@ -37,7 +37,7 @@ module.exports = {
             console.log("The user undeafened in channel");
             let temp = new moment().diff(vol[oldState.member.user.id].time, 'seconds');
             console.log(oldState.member.user.username + " has undeafened! after "+ temp +"\n\n\n");
-            file.writeToFile(oldState.member.user.id,temp);
+            file.writeToFile(oldState.member.user.id,temp, oldState.member.user.username);
             vol[oldState.member.user.id] = null;
             
         }
