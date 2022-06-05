@@ -8,8 +8,6 @@ module.exports = {
             //Accessing the file library
             var file = require('./file.js');
             let output = "Username : Time Spend Deafened\n";
-            //output += file.getLeaderboard().toString();
-            // 144562710363897856,Ethan,1
 
             //Message Embed
             const exampleEmbed = new MessageEmbed()
@@ -18,12 +16,6 @@ module.exports = {
             let userList = [];
             userList = file.getLeaderboard();
             console.log(typeof userList);
-            /*
-            exampleEmbed.addFields(
-                { name: 'Name', value: `\u200B`, inline: true },
-                { name: 'Time Spend Deafened', value: `\u200B`, inline: true },
-                { name: '\u200B', value: '\u200B', inline: true },
-                );*/
             userList.forEach(user => {
                 if(user===userList[0]){
                 exampleEmbed.addFields(
@@ -41,26 +33,6 @@ module.exports = {
         });
             exampleEmbed.setTimestamp()
             msg.reply({ embeds: [exampleEmbed] });
-        }
-        else if(msg.content === "gc"){
-            const Guilds = client.guilds.cache.map(guild => guild.id);
-            console.log(Guilds);
-            let fuck ="";
-            const guild = client.guilds.resolve(Guilds[0]);
-            // Fetch the members of the guild and log them
-            const x = guild.members.fetch()
-                .then(
-                    members => {
-                        members.forEach(member => {
-                            fuck+=member.toString();
-                            console.log(member.user.username);
-                        });
-                    }
-                )
-                .catch(console.error);
-                
-        }
-
-        
+        }        
     }
 };

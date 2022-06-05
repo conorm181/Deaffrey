@@ -12,7 +12,8 @@ module.exports = {
                 let data = line.split(',');
                 list.set(data[1],data   [2]);
                 let tempUser = new user(data[0],data[1],data[2]);
-                listOfUsers.push(tempUser);
+                if(tempUser.ID.length > 0)
+                    listOfUsers.push(tempUser);
             });
             this.orderUserList(listOfUsers);
         return listOfUsers;
