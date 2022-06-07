@@ -21,13 +21,13 @@ module.exports = {
                 if(user===userList[0]){
                 exampleEmbed.addFields(
                 { name: 'Name', value: `${user.Name}`, inline: true },
-                { name: 'Time Spend Deafened', value: `${user.TimeSpentDeafened} seconds`, inline: true },
+                { name: 'Time Spend Deafened', value: `${user.timeParse()}`, inline: true },
                 { name: '\u200B', value: '\u200B', inline: true },
                 )}else
                 { 
                 exampleEmbed.addFields(
                     { name: '\u200B', value: `${user.Name}`, inline: true },
-                    { name: '\u200B', value: `${user.TimeSpentDeafened} seconds`, inline: true },
+                    { name: '\u200B', value: `${user.timeParse()}`, inline: true },
                     { name: '\u200B', value: '\u200B', inline: true },
                 )
                 }
