@@ -3,7 +3,8 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
 
     sendResponse: function (msg) {
-        if(msg.content === "leaderboard")
+        const variations = ["leaderboard","lb","board","table"];
+        if(variations.includes(msg.content.toLowerCase()))
         {
             //Accessing the file library
             var file = require('./file.js');
