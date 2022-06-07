@@ -15,7 +15,7 @@ module.exports = {
             .setAuthor({ name: 'Deafen Leaderboard' });
             let userList = [];
             userList = file.getLeaderboard();
-            console.log(typeof userList);
+            //console.log(typeof userList);
             userList.forEach(user => {
                 if(user===userList[0]){
                 exampleEmbed.addFields(

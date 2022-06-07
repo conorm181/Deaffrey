@@ -89,6 +89,8 @@ module.exports = {
     },
 
     orderUserList: function(userList){
-        userList.sort((a,b) => (a.TimeSpentDeafened < b.TimeSpentDeafened) ? 1 : ((b.TimeSpentDeafened < a.TimeSpentDeafened) ? -1 : 0));
+        userList.sort((a,b) => {
+            return b.TimeSpentDeafened - a.TimeSpentDeafened;
+        });
     }
 };
