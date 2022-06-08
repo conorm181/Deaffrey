@@ -35,5 +35,23 @@ module.exports = {
             exampleEmbed.setTimestamp()
             msg.reply({ embeds: [exampleEmbed] });
         }        
+    },
+
+    sendTable: function(msg){
+        const variations = ["leaderboard","lb","board","table"];
+        if(variations.includes(msg.content.toLowerCase()))
+        {
+            //Accessing the file library
+            var file = require('./file.js');
+            var AsciiTable = require('ascii-table');
+            let userList = [];
+            userList = file.getLeaderboard();
+            var table = new AsciiTable("Deafen Leaderboard")
+            table.setHeading('Name', 'Time Spend Deafened')
+            userList.forEach(user =>{
+                table.addRow(user.Name, user.timeParse());
+            })
+            msg.reply('```\n'+table.toString()+'```');
+        }        
     }
 };

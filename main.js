@@ -51,7 +51,7 @@ client.on('messageCreate', function(msg){
     if(msg.content === "setup")
         msg.reply(output);
     else
-        clientMessage.sendResponse(msg);
+        clientMessage.sendTable(msg);
 })
 
 //Voicstate Listener
