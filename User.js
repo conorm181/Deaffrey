@@ -12,12 +12,12 @@ module.exports = class User {
     timeParse(){
         var t = moment.duration(this.TimeSpentDeafened,'seconds');
         if(this.TimeSpentDeafened<300)
-            return this.TimeSpentDeafened + " seconds";
+            return this.TimeSpentDeafened + "s";
         else if(this.TimeSpentDeafened<7200)
-            return t.minutes() + " minutes " + t.seconds() + " seconds";
+            return t.minutes() + "m " + t.seconds() + "s";
         else if(this.TimeSpentDeafened<172800)
-            return t.hours() + " hours " + t.minutes() + " minutes";
+            return t.hours() + "h " + t.minutes() + "m";
         else
-            return t.days() + " days " + t.hours() + " hours";
+            return t.days() + "d " + t.hours() + "h";
     }
 }

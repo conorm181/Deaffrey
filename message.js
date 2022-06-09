@@ -47,7 +47,7 @@ module.exports = {
             let userList = [];
             userList = file.getLeaderboard();
             var table = new AsciiTable("Deafen Leaderboard")
-            table.setHeading('Name', 'Time Spend Deafened')
+            table.setHeading('Name', 'Time Deafened')
             userList.forEach(user =>{
                 table.addRow(user.Name, user.timeParse());
             })
