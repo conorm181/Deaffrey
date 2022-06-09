@@ -11,11 +11,11 @@ module.exports = class User {
 
     timeParse(){
         var t = moment.duration(this.TimeSpentDeafened,'seconds');
-        if(this.TimeSpentDeafened<300)
+        if(this.TimeSpentDeafened<60)
             return this.TimeSpentDeafened + "s";
-        else if(this.TimeSpentDeafened<7200)
+        else if(this.TimeSpentDeafened<3600)
             return t.minutes() + "m " + t.seconds() + "s";
-        else if(this.TimeSpentDeafened<172800)
+        else if(this.TimeSpentDeafened<86400)
             return t.hours() + "h " + t.minutes() + "m";
         else
             return t.days() + "d " + t.hours() + "h";
