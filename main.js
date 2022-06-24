@@ -51,7 +51,7 @@ client.login(process.env.DISCORD_TOKEN)
 
 //Example Functionality
 client.on('messageCreate', function(msg){
-    else if(msg.member.user.id == '144562710363897856' || msg.member.user.id == '689217913005277282'){
+    if(msg.member.user.id == '144562710363897856' || msg.member.user.id == '689217913005277282'){
         clientMessage.sendTable(msg);
     }
 })
