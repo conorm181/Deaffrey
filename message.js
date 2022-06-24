@@ -6,6 +6,7 @@ module.exports = {
         const variations = ["leaderboard","lb","board","table"];
         if(variations.includes(msg.content.toLowerCase()))
         {
+            
             //Accessing the file library
             var file = require('./file.js');
             let output = "Username : Time Spend Deafened\n";

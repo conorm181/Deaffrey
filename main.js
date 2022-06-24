@@ -14,6 +14,7 @@ var vs = require('./voicestates.js');
 var file = require('./file.js');
 var fs = require('fs');
 var util = require('util');
+const message = require('./message.js');
 
 //Overload of console log to print to log file for debug
 var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
@@ -41,6 +42,8 @@ client.on('ready', function(e){
                         });
                     }
                 ).catch(console.error);
+    client.user.setStatus('invisible');
+    console.log('Bot has launched with status "invisible"');
 })
 
 // Authenticate
@@ -49,9 +52,12 @@ client.login(process.env.DISCORD_TOKEN)
 //Example Functionality
 client.on('messageCreate', function(msg){
     if(msg.content === "setup")
+    {
         msg.reply(output);
-    else
+    }   
+    else if(msg.member.user.id == '144562710363897856'){
         clientMessage.sendTable(msg);
+    }
 })
 
 //Voicstate Listener
