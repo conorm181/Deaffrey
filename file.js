@@ -7,7 +7,11 @@ var listOfUsers = [];
 module.exports = {
 
     readFile: function () {
-        const allFileContents = fs.readFileSync('data.txt', 'utf-8');
+        fs.readFile('data.txt', 'utf-8', function(err, allFileContents){
+
+            if(err)
+                return err;
+
             allFileContents.split(/\r?\n/).forEach(line =>  {
                 let data = line.split(',');
                 list.set(data[1],data   [2]);
@@ -15,7 +19,9 @@ module.exports = {
                 if(tempUser.ID.length > 0)
                     listOfUsers.push(tempUser);
             });
-            this.orderUserList(listOfUsers);
+
+        });
+        this.orderUserList(listOfUsers);
         return listOfUsers;
     },
 
